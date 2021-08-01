@@ -1,0 +1,30 @@
+game = AddThreeGame()
+while True:
+    num = int(input("First, enter an integer from 1 to 9: "))
+
+    while True:
+        if game.make_move("first", num):
+            break
+        else:
+            num += int(input("Try again: "))
+    while True:
+        num = int(input("Second, enter an integer from 1 to 9: "))
+        if game.make_move("second", num):
+            break
+        else:
+            num += int(input("Try again: "))
+
+    state = game.get_current_state()
+
+    if state == "UNFINISHED":
+        print("We have unfinished business, come back for more \n")
+
+    elif state == "FIRST_WON":
+        print("Player One is the winner! \n")
+        break
+    elif state == "SECOND_WON":
+        print("Player Two is the winner! \n")
+        break
+    elif state == "DRAW":
+        print("This game ended in a draw \n")
+        break
