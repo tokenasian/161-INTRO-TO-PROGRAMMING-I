@@ -28,69 +28,62 @@ class AddThreeGame:
         self._first_player = 0
         self._second_player = 0
         self._input_number = []
-        self._current_state = "UNFINISHED"
+        self._valid_choices = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        self._current_state = "UNFINISHED", "FIRST_WON", "SECOND_WON", "DRAW"
 
     def get_current_state(self):
         return self._current_state
 
-    def make_move(self, player, number):
-        if number in self._input_number:
+    def make_move(self, current_player, user_input):
+        if user_input in self._input_number:
             return False
 
-        if number < 1 or number > 9:
+        if user_input < 1 or user_input > 9:
             return False
 
-        if player == "first":
-            self._input_number.append(number)
-            self._first_list.append(number)
-            for i in range(0, len(self._first_list) - 2):
-                for j in range(i + 1, len(self._first_list) - 1):
-                    for k in range(j + 1, len(self._first_list)):
-                        if self._first_list[i] + self._first_list[j] + self._first_list[k] == 15:
-                            self._current_state = "FIRST_WON"
-
-        elif player == "second":
-            self._input_number.append(number)
-            self._second_list.append(number)
-            for i in range(0, len(self._second_list) - 2):
-                for j in range(i + 1, len(self._second_list) - 1):
-                    for k in range(j + 1, len(self._second_list)):
-                        if self._second_list[i] + self._second_list[j] + self._second_list[k] == 15:
-                            self._current_state = "SECOND_WON"
+        if current_player == "first":
+            self._input_number.append(user_input)
+            self._first_list.append(user_input)
+        else:
+            self._second_list.append(user_input)
 
         if self._first_player == 15 and self._second_player == 15:
             self._current_state = "DRAW"
-        if len(self._input_number) == 9:
-            self._current_state = "DRAW"
-            return True
+
+        if sum(self._first_list) == 15:
+            self._current_state = "FIRST_WON"
+        if sum(self._second_list) == 15:
+            self._current_state = "SECOND_WON"
+
+        return True
 
 
 game = AddThreeGame()
-while True:
-    num = int(input("First, enter an integer from 1 to 9: "))
 
+
+while True:
     while True:
+        num = int(input("First: "))
         if game.make_move("first", num):
             break
         else:
-            num += int(input("Try again: "))
+            num = int(input("That entry is invalid. Try again: "))
     while True:
-        num = int(input("Second, enter an integer from 1 to 9: "))
+        num = int(input("Second: "))
         if game.make_move("second", num):
             break
         else:
-            num += int(input("Try again: "))
+            num = int(input("That entry is invalid. Try again: "))
 
     state = game.get_current_state()
-
     if state == "UNFINISHED":
-        print("We have unfinished business, come back for more \n")
+        print("We have unfinished business, come back for more")
 
-    elif state == "FIRST_WON":
-        print("Player One is the winner! \n")
-        break
-    elif state == "SECOND_WON":
-        print("Player Two is the winner! \n")
-        break
-    elif state == "DRAW":
-        print("This game ended in a draw \n")
+    if state == "FIRST_WON":
+        print("Player 1 is the winner. Player 2 is a loser.")
+
+    if state == "SECOND_WON":
+        print("Player 2 is the winner. Player 1 is a loser.")
+
+    if state == "DRAW":
+        print("Tie.")
