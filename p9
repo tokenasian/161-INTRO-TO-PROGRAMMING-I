@@ -39,19 +39,29 @@ class AddThreeGame:
 
 game = AddThreeGame()
 
-while True:
-    while True:
-        num = int(input("First: "))
-        if game.make_move("first", num):
-            break
-        else:
-            num = int(input("That entry is invalid. Try again: "))
-    while True:
-        num = int(input("Second: "))
-        if game.make_move("second", num):
-            break
-        else:
-            num = int(input("That entry is invalid. Try again: "))
+def get_current_player_input(self, current_player):
+    user_input = 0
+    if current_player == "first":
+        user_input = int(input("First: "))
+    if game.make_move("first", user_input):
+        if check_if_winner(self):
+            if sum(self._first_list) == 15:
+                self._current_state = "FIRST_WON"
+            else:
+                get_current_player_input("second")
+    else:
+        user_input = int(input("That entry is invalid. Try again: "))
+
+    if current_player == "second":
+        user_input = int(input("First: "))
+    if game.make_move("second", user_input):
+        if check_if_winner(self):
+            if sum(self._second_list) == 15:
+                self._current_state = "SECOND_WON"
+            else:
+                get_current_player_input("first")
+    else:
+        user_input = int(input("That entry is invalid. Try again: "))
 
 
     def check_if_winner(self):
