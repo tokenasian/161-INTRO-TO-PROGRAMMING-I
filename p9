@@ -41,7 +41,7 @@ game = AddThreeGame()
 
 
 def get_current_player_input(self, current_player):
-    user_input = []
+    user_input = 0
     if current_player == "first":
         user_input = int(input("First: "))
     if game.make_move("first", user_input):
@@ -86,14 +86,3 @@ if state_game == "SECOND_WON":
 if state_game == "DRAW":
     print("Tie.")
 
-issues
-
-if self._current_state = "FIRST_WON", "SECOND_WON", "DRAW", "UNFINISHED"
-is only "UNFINISHED"
-the wins aren't called
-
-program does not stop for a draw if both == 15
-program does not stop if no one is the winner (1, 2, 3, 4, 5, 6, 7, 8, 9) keeps going
-
-parameter current_player unfilled
-local variable user_input value is not used
