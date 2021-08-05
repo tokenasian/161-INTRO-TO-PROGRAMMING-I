@@ -85,7 +85,7 @@ class AddThreeGame:
     def end_of_game(self):
         """Returns state of game"""
         if self._current_state == "UNFINISHED":
-            print("We have unfinished business, come back for more")
+            print("Sorry, this game is unfinished.")
 
         if self._current_state == "FIRST_WON":
             print("Player 1 is the winner. Player 2 is a loser.")
@@ -94,9 +94,8 @@ class AddThreeGame:
             print("Player 2 is the winner. Player 1 is a loser.")
 
         if self._current_state == "DRAW":
-            print("Tie.")
+            print("This ended in a tie. Nobody wins.")
 
 
 game = AddThreeGame()
 game.start()
-
