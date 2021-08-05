@@ -39,8 +39,9 @@ class AddThreeGame:
 
 game = AddThreeGame()
 
+
 def get_current_player_input(self, current_player):
-    user_input = 0
+    user_input = []
     if current_player == "first":
         user_input = int(input("First: "))
     if game.make_move("first", user_input):
@@ -64,27 +65,26 @@ def get_current_player_input(self, current_player):
         user_input = int(input("That entry is invalid. Try again: "))
 
 
-    def check_if_winner(self):
-        if sum(self._first_list) == 15 and sum(self._second_list) == 15:
-            return True
-        else:
-            return False
+def check_if_winner(self):
+    if sum(self._first_list) == 15 and sum(self._second_list) == 15:
+        return True
+    else:
+        return False
 
-    state_game = game.get_current_state()
 
-    if state_game == "UNFINISHED":
-        print("We have unfinished business, come back for more")
+state_game = game.get_current_state()
 
-    if state_game == "FIRST_WON":
-        print("Player 1 is the winner. Player 2 is a loser.")
+if state_game == "UNFINISHED":
+    print("We have unfinished business, come back for more")
 
-    if state_game == "SECOND_WON":
-        print("Player 2 is the winner. Player 1 is a loser.")
+if state_game == "FIRST_WON":
+    print("Player 1 is the winner. Player 2 is a loser.")
 
-    if state_game == "DRAW":
-        print("Tie.")
+if state_game == "SECOND_WON":
+    print("Player 2 is the winner. Player 1 is a loser.")
 
----
+if state_game == "DRAW":
+    print("Tie.")
 
 issues
 
@@ -94,3 +94,6 @@ the wins aren't called
 
 program does not stop for a draw if both == 15
 program does not stop if no one is the winner (1, 2, 3, 4, 5, 6, 7, 8, 9) keeps going
+
+parameter current_player unfilled
+local variable user_input value is not used
