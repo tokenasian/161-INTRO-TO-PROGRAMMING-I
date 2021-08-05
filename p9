@@ -1,5 +1,5 @@
 # Author: Matthew Armstrong
-# Date:
+# Date: 08/05
 # Description:
 class AddThreeGame:
     def __init__(self):
@@ -8,8 +8,7 @@ class AddThreeGame:
         self._first_player = 0
         self._second_player = 0
         self._input_number = []
-        self._valid_choices = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        self._current_state = "UNFINISHED", "FIRST_WON", "SECOND_WON", "DRAW"
+        self._current_state = "FIRST_WON", "SECOND_WON", "DRAW", "UNFINISHED"
 
     def get_current_state(self):
         return self._current_state
@@ -27,19 +26,18 @@ class AddThreeGame:
         else:
             self._second_list.append(user_input)
 
-        if self._first_player == 15 and self._second_player == 15:
-            self._current_state = "DRAW"
-
         if sum(self._first_list) == 15:
             self._current_state = "FIRST_WON"
         if sum(self._second_list) == 15:
             self._current_state = "SECOND_WON"
 
+        if self._first_player == 15 and self._second_player == 15:
+            self._current_state = "DRAW"
+
         return True
 
 
 game = AddThreeGame()
-
 
 while True:
     while True:
@@ -55,15 +53,34 @@ while True:
         else:
             num = int(input("That entry is invalid. Try again: "))
 
-    state = game.get_current_state()
-    if state == "UNFINISHED":
+
+    def check_if_winner(self):
+        if sum(self._first_list) == 15 and sum(self._second_list) == 15:
+            return True
+        else:
+            return False
+
+    state_game = game.get_current_state()
+
+    if state_game == "UNFINISHED":
         print("We have unfinished business, come back for more")
 
-    if state == "FIRST_WON":
+    if state_game == "FIRST_WON":
         print("Player 1 is the winner. Player 2 is a loser.")
 
-    if state == "SECOND_WON":
+    if state_game == "SECOND_WON":
         print("Player 2 is the winner. Player 1 is a loser.")
 
-    if state == "DRAW":
+    if state_game == "DRAW":
         print("Tie.")
+
+---
+
+issues
+
+if self._current_state = "FIRST_WON", "SECOND_WON", "DRAW", "UNFINISHED"
+is only "UNFINISHED"
+the wins aren't called
+
+program does not stop for a draw if both == 15
+program does not stop if no one is the winner (1, 2, 3, 4, 5, 6, 7, 8, 9) keeps going
