@@ -36,33 +36,38 @@ class AddThreeGame:
 
         return True
 
+    def get_current_player_input(self, current_player):
+        user_input = 0
+        if current_player == "first":
+            user_input = int(input("First: "))
+        if game.make_move("first", user_input):
+            if check_if_winner(self):
+                if sum(self._first_list) == 15:
+                    self._current_state = "FIRST_WON"
+                else:
+                    current_player("second")
+        else:
+            user_input = int(input("That entry is invalid. Try again: "))
+
+        if current_player == "second":
+            user_input = int(input("First: "))
+        if game.make_move("second", user_input):
+            if check_if_winner(self):
+                if sum(self._second_list) == 15:
+                    self._current_state = "SECOND_WON"
+                else:
+                    current_player("first")
+        else:
+            user_input = int(input("That entry is invalid. Try again: "))
+
+    def check_if_winner(self):
+        if sum(self._first_list) == 15 and sum(self._second_list) == 15:
+            return True
+        else:
+            return False
+
 
 game = AddThreeGame()
-
-
-def get_current_player_input(self, current_player):
-    user_input = 0
-    if current_player == "first":
-        user_input = int(input("First: "))
-    if game.make_move("first", user_input):
-        if check_if_winner(self):
-            if sum(self._first_list) == 15:
-                self._current_state = "FIRST_WON"
-            else:
-                get_current_player_input("second")
-    else:
-        user_input = int(input("That entry is invalid. Try again: "))
-
-    if current_player == "second":
-        user_input = int(input("First: "))
-    if game.make_move("second", user_input):
-        if check_if_winner(self):
-            if sum(self._second_list) == 15:
-                self._current_state = "SECOND_WON"
-            else:
-                get_current_player_input("first")
-    else:
-        user_input = int(input("That entry is invalid. Try again: "))
 
 
 def check_if_winner(self):
@@ -81,8 +86,9 @@ if state_game == "FIRST_WON":
     print("Player 1 is the winner. Player 2 is a loser.")
 
 if state_game == "SECOND_WON":
-    print("Player 2 is the winner. Player 1 is a loser.")
 
+    print("Player 2 is the winner. Player 1 is a loser.")
 if state_game == "DRAW":
     print("Tie.")
+
 
