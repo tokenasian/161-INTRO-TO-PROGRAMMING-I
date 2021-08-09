@@ -1,3 +1,80 @@
+# TODO add params onto Ant init for the size of the board and for the starting ant position
+class Ant:
+    UP = 0
+    RIGHT = 1
+    DOWN = 2
+    LEFT = 3
+
+    def __init__(self):
+        self._size_x = 9
+        self._size_y = 9
+        self._initial_grid = [[0] * self._size_x for i in range(self._size_y)]
+
+    def render(self, _ant_x, _ant_y, _grid=None):
+        if _grid is None:
+            _grid = self._initial_grid
+        _grid[_ant_x][_ant_y] = 8
+        for x in ant._initial_grid:
+            for y in x:
+                white = "_"
+                black = "#"
+                cur_pos = "8"
+                if y == 0 and y != 8:
+                    position = white
+                elif y == 8:
+                    position = cur_pos
+                else:
+                    position = black
+                #print(position, end="")
+            #print(end="\n")
+
+
+ant = Ant()
+
+# ant.render()
+
+# correct_round=lambda x,y=None: round(x+1e-15,y)
+# python 3 does banker rounding and rounds 2.5 down to 2 while rounding 1.5 up to 2 as well.....
+# looking back at the spec ant won't be positioned in the middle so we don't need to worry about rounding 
+
+# Ant should be rendered as 8
+# ant_x = correct_round(ant.size_x / 2) - 1
+# ant_y = correct_round(ant.size_y / 2) - 1
+
+
+# lets try to flip a random position now
+grid = ant._initial_grid
+# lets set a random ant position
+rand_x = 2
+rand_y = 4
+grid[rand_x][rand_y] = 1 if grid[rand_x][rand_y] == 0 else 0
+#ant_x = 2
+#ant_y = 4
+#ant_x = 3
+#ant_y = 4
+#ant_x = 2
+#ant_y = 5
+#ant_x = 1
+#ant_y = 4
+ant_x = 2
+ant_y = 3
+ant.render(ant_x, ant_y, grid)
+
+# grid = [[0,0,0,0,0],[0,0,0,0,0],[0,0,1,0,0],[0,0,0,0,0],[0,0,0,0,0]]
+
+
+def move_up(_ant_x, _ant_y):
+    new_x = _ant_x - 1
+    new_y = _ant_y
+    return[new_x, new_y]
+
+
+print("current coords are",  f'[{ant_x},{ant_y}] up coordinates are {move_up(ant_x, ant_y)}')
+
+///
+
+
+
 # Author: Matthew Armstrongclass Ant
   MOVE = [[1,0], [0,1], [-1,0], [0,-1]]   # [0]:east, [1]:south, [2]:west, [3]:north
 
