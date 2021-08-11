@@ -48,11 +48,14 @@ class Ant:
             return y
         return output
 
-    def new_ant(self, new_ant_x, new_ant_y):
-        if new_ant_x <= self._size_x - 1
-        if new_ant_x >= self._size_x + 1
-        if new_ant_y <= self._size_x - 1
-        if new_ant_y >= self._size_y + 1
+    def move_ant(self, new_ant_x, new_ant_y):
+            if new_ant_x <= 0:
+                new_ant_x = self._size_x - 1
+            if new_ant_x >= self._size_x + 1
+            if new_ant_y <= 0:
+                new_ant_y = self._size_x - 1
+            if new_ant_y >= self._size_y + 1
+
 
 
 
