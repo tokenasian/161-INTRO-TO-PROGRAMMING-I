@@ -1,5 +1,7 @@
 import time
 
+
+
 # TODO add params onto Ant init for the size of the board and for the starting ant position
 
 
@@ -44,27 +46,17 @@ class Ant:
     def turn_left(self, input, _grid):
         y = 3
         output = input - 1
-        if _grid[self._direct] == 3:
-            turn_left = False
-        else:
-            turn_left = True
         if input == 0:
             return y
         return output
 
-    def movement(self):
-        if new_ant_x >= self_size_x
-            new_ant_x = 0
+    def new_ant(self, new_ant_x, new_ant_y):
+        if new_ant_x <= self._size_x - 1
+        if new_ant_x >= self._size_x + 1
+        if new_ant_y <= self._size_x - 1
+        if new_ant_y >= self._size_y + 1
 
 
-    new_ant_x <= 0
-    new_ant_x = self._size_x = -1
-    new_ant_x >= 0
-    new_ant_x = self._size_x = +1
-    new_ant_y <= 0
-    new_ant_y = self._size_x-1
-    new_ant_y >= 0
-    new_ant_y = self._size_y+1
 
 ant = Ant()
 
