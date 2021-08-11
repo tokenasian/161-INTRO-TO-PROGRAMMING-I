@@ -1,7 +1,5 @@
 import time
 
-
-
 # TODO add params onto Ant init for the size of the board and for the starting ant position
 
 
@@ -12,7 +10,7 @@ class Ant:
     def __init__(self):
         self._size_x = 3
         self._size_y = 3
-        self._direct = 0
+        self._direction = 0
         self._initial_grid = [[0] * self._size_x for i in range(self._size_y)]
 
     def render(self, _ant_x, _ant_y, _grid=None):
