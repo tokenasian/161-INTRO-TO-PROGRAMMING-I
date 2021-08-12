@@ -48,7 +48,7 @@ class Ant:
 
     def _get_ant_steps(self):
         """get the number of steps for the ant"""
-        self._move = int(input("Please enter the number of steps for the simulation : "))
+        self._required_moves = int(input("Please enter the number of steps for the simulation : "))
 
     def _grid_builder(self):
         """make the grid"""
@@ -150,4 +150,3 @@ class Ant:
 
 
 ant = Ant()
-
