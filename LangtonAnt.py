@@ -12,6 +12,7 @@ class Ant:
         self._ant_x = 5  # pos
         self._ant_y = 5  # pos
         self._get_input_grid_size()
+        self._validate_grid_size()
         self._get_ant_starting_pos()
         self._validate_ant_starting_pos()
         self._get_ant_orientation()
@@ -26,17 +27,18 @@ class Ant:
 
         self._grid_builder()
 
+    def _validate_grid_size(self):
+        if self._size_x + 1 > 100 or self._size_x < 0:
+            print("invalid grid size input, number must be positive and must be under 100")
+            self._get_input_grid_size()
+
     def _get_ant_starting_pos(self):
         """get the ant position"""
         self._ant_x = int(input("Please enter a number as the starting row number: "))
         self._ant_y = int(input("Please enter a number as the starting column number : "))
 
     def _validate_ant_starting_pos(self):
-        """validate the ant position"""
-        if self._ant_x > self._size_x - 1:
-            print("Ant starting position was invalid")
-            self._get_ant_starting_pos()
-        if self._ant_y > self._size_y - 1:
+        if self._ant_x > self._size_x - 1 or self._ant_y > self._size_y - 1 or self._ant_x < 0 or self._ant_y < 0:
             print("Ant starting position was invalid")
             self._get_ant_starting_pos()
 
@@ -127,12 +129,12 @@ class Ant:
         new_grid[self._ant_x][self._ant_y] = 8
         for x in new_grid:
             for y in x:
-                # white = "_"
-                white = "　"
-                # black = "#"
-                black = "○"
-                # cur_pos = "8"
-                cur_pos = "●"
+                white = "_"
+                # white = "　"
+                black = "#"
+                # black = "○"
+                cur_pos = "8"
+                # cur_pos = "●"
                 if y == 0 and y != 8:
                     position = white
                 elif y == 8:
@@ -148,3 +150,4 @@ class Ant:
 
 
 ant = Ant()
+
