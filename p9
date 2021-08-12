@@ -1,98 +1,89 @@
-import time
-
-
 class Ant:
-    # Init always comes first
+
     def __init__(self):
-        self._size_x = 13
-        self._size_y = 13
+        self._size_x = 13  # size of grid
+        self._size_y = 13  # size of grid
         self._direction = 0
         self._initial_grid = [[0] * self._size_x for i in range(self._size_y)]
         self._direction = 0
-        self._grid = []  # this needs to be updated on the very first move
+        self._grid = []
         self._move = 0
-        self._required_moves = 500  # one of the required input params is supposed to be number of moves to make
-        self._ant_x = 5  # one of the required input params is ant position
-        self._ant_y = 5  # one of the required input params is ant position
+        self._required_moves = 100
+        self._ant_x = 5  # pos
+        self._ant_y = 5  # pos
         self._get_input_grid_size()
+        self._get_ant_starting_pos()
+        self._get_ant_orientation()
+        self._get_ant_steps()
         self._move_ant()
-        # TODO finish the required inputs
 
-    # End of Init
-
-    # Start of getting required inputs
     def _get_input_grid_size(self):
-        self._size_x = int(input("Enter the amount of rows tall you want the grid to be: "))
-        self._size_y = int(input("Enter the amount of cols wide you want the grid to be: "))
+        _grid_size = int(input("Please enter a number no larger than 100 for the size of the square board:  "))
+        self._size_x = _grid_size
+        self._size_y = _grid_size
+
         self._grid_builder()
 
-    # TODO Finish required input functions similar to above
-    # End of getting required inputs
+    def _get_ant_starting_pos(self):
+        self._ant_x = int(input("Please enter a number as the starting row number: "))
+        self._ant_y = int(input("Please enter a number as the starting column number : "))
 
-    # Start _grid_builder
+    def _get_ant_orientation(self):
+        self._direction = int(input("Please choose the ant’s starting orientation:  "))
+
+    def _get_ant_steps(self):
+        self._move = int(input("Please enter the number of steps for the simulation : "))
+
     def _grid_builder(self):
         self._grid = [[0] * self._size_x for i in range(self._size_y)]
 
-    # End of _grid_builder
-
-    # Start of move forward in proper direction
     def _move_up(self):
+        """move ant in proper direction"""
         self._ant_x = self._ant_x - 1
         if self._ant_x < 0:
-            # x position can't be less than 0, and size_x is misaligned with the grid by 1,
-            # so set it to that to rollover
             self._ant_x = self._size_x - 1
 
     def _move_right(self):
+        """move ant in proper direction"""
         self._ant_y = self._ant_y + 1
         if self._ant_y > self._size_y - 1:
-            # y position can't be larger than the max grid size of y, so rollover to 0
             self._ant_y = 0
 
     def _move_down(self):
+        """move ant in proper direction"""
         self._ant_x = self._ant_x + 1
         if self._ant_x > self._size_x - 1:
-            # x position can't be larger than the max grid size of x, so rollover to 0
             self._ant_x = 0
 
     def _move_left(self):
+        """move ant in proper direction"""
         self._ant_y = self._ant_y - 1
         if self._ant_y < 0:
-            # y position can't be less than 0, and size_y is misaligned with the grid by 1,
-            # so set it to that to rollover
             self._ant_y = self._size_y - 1
 
-    # End of move forward in proper direction
-
-    # Start of direction changes
     def _turn_right(self, last_direction):
+        """direction change"""
         new_direction = last_direction + 1
         if last_direction == 3:
             new_direction = 0
         return new_direction
 
     def _turn_left(self, last_direction):
+        """direction change"""
         new_direction = last_direction - 1
         if last_direction == 0:
             new_direction = 3
         return new_direction
 
-    # End of Direction Changes
-
-    # Start of check and update direction
     def _check_and_update_direction(self):
-        # if grid is black or white then turn proper direction
+        """check if grid is black or white then turn proper direction"""
         if self._grid[self._ant_x][self._ant_y] == 0:
-            # update direction before moving forward
             self._direction = self._turn_right(self._direction)
         else:
-            # update direction towards the other direction before moving forward
             self._direction = self._turn_left(self._direction)
 
-    # End of check and update direction
-
-    # Start of move_ant function
     def _move_ant(self):
+        """Move function"""
         if self._required_moves > self._move:
             self._check_and_update_direction()
             if self._direction == 0:
@@ -113,13 +104,10 @@ class Ant:
                 print()
             self._move_ant()
         else:
-            # No moves are left so it's time to render
             self._render()
 
-    # End of move_ant function
-
-    # Start of render function
     def _render(self, _grid=None):
+        """start of render function"""
         new_grid = list(map(list, self._grid))
         new_grid[self._ant_x][self._ant_y] = 8
         for x in new_grid:
@@ -138,67 +126,9 @@ class Ant:
                     position = black
                 print(position, end="")
             print(end="\n")
-    # End of render function
 
     def run_stimulation(self):
         self._move_ant()
 
 
 ant = Ant()
-
-
-# SCRATCH AREA BELOW #
-
-# print("current coords are",
-#       f'[{ant_x},{ant_y}] up coordinates are {move_up(ant_x, ant_y)}')
-# grid = ant._initial_grid
-
-
-# ant_x = 1
-# ant_y = 1
-
-# rand_x = ant_x
-# rand_y = ant_y
-# grid[rand_x][rand_y] = 1 if grid[rand_x][rand_y] == 0 else 0
-
-# print("")
-# print("=====Init=Loc=====")
-# ant.render(ant_x, ant_y, grid)
-
-# time.sleep(0.5)
-# print("")
-# print("=====Moved=Up=====")
-# ant_moved_up = move_up(ant_x, ant_y)
-# grid[rand_x][rand_y] = 1 if grid[rand_x][rand_y] != 1 else 0
-# ant.render(ant_moved_up[0], ant_moved_up[1], grid)
-
-# time.sleep(0.5)
-# print("")
-# print("====Moved=Down====")
-# # reset grid
-# grid = [[0] * 3 for i in range(3)]
-# # end of reset grid
-# ant_moved_down = move_down(ant_x, ant_y)
-# grid[1][1] = 1
-# ant.render(ant_moved_down[0], ant_moved_down[1], grid)
-
-# time.sleep(0.5)
-# print("")
-# print("====Moved=Left====")
-# # reset grid
-# grid = [[0] * 3 for i in range(3)]
-# # end of reset grid
-# ant_moved_left = move_left(ant_x, ant_y)
-# grid[1][1] = 1
-# ant.render(ant_moved_left[0], ant_moved_left[1], grid)
-
-
-# time.sleep(0.5)
-# print("")
-# print("====Moved=Right===")
-# # reset grid
-# grid = [[0] * 3 for i in range(3)]
-# # end of reset grid
-# ant_moved_right = move_right(ant_x, ant_y)
-# grid[1][1] = 1
-# ant.render(ant_moved_right[0], ant_moved_right[1], grid)
