@@ -19,6 +19,7 @@ class Ant:
         self._move_ant()
 
     def _get_input_grid_size(self):
+        """get the grid size"""
         _grid_size = int(input("Please enter a number no larger than 100 for the size of the square board:  "))
         self._size_x = _grid_size
         self._size_y = _grid_size
@@ -26,10 +27,12 @@ class Ant:
         self._grid_builder()
 
     def _get_ant_starting_pos(self):
+        """get the ant position"""
         self._ant_x = int(input("Please enter a number as the starting row number: "))
         self._ant_y = int(input("Please enter a number as the starting column number : "))
 
     def _validate_ant_starting_pos(self):
+        """validate the ant position"""
         if self._ant_x > self._size_x - 1:
             print("Ant starting position was invalid")
             self._get_ant_starting_pos()
@@ -38,47 +41,50 @@ class Ant:
             self._get_ant_starting_pos()
 
     def _get_ant_orientation(self):
+        """get the ant orientation"""
         self._direction = int(input("Please choose the ant’s starting orientation:  "))
 
     def _get_ant_steps(self):
+        """get the number of steps for the ant"""
         self._move = int(input("Please enter the number of steps for the simulation : "))
 
     def _grid_builder(self):
+        """make the grid"""
         self._grid = [[0] * self._size_x for i in range(self._size_y)]
 
     def _move_up(self):
-        """move ant in proper direction"""
+        """move the ant in the proper direction"""
         self._ant_x = self._ant_x - 1
         if self._ant_x < 0:
             self._ant_x = self._size_x - 1
 
     def _move_right(self):
-        """move ant in proper direction"""
+        """move the ant in the proper direction"""
         self._ant_y = self._ant_y + 1
         if self._ant_y > self._size_y - 1:
             self._ant_y = 0
 
     def _move_down(self):
-        """move ant in proper direction"""
+        """move the ant in the proper direction"""
         self._ant_x = self._ant_x + 1
         if self._ant_x > self._size_x - 1:
             self._ant_x = 0
 
     def _move_left(self):
-        """move ant in proper direction"""
+        """move the ant in the proper direction"""
         self._ant_y = self._ant_y - 1
         if self._ant_y < 0:
             self._ant_y = self._size_y - 1
 
     def _turn_right(self, last_direction):
-        """direction change"""
+        """make the ant change direction"""
         new_direction = last_direction + 1
         if last_direction == 3:
             new_direction = 0
         return new_direction
 
     def _turn_left(self, last_direction):
-        """direction change"""
+        """make the ant change direction"""
         new_direction = last_direction - 1
         if last_direction == 0:
             new_direction = 3
@@ -92,7 +98,7 @@ class Ant:
             self._direction = self._turn_left(self._direction)
 
     def _move_ant(self):
-        """Move function"""
+        """make the ant move"""
         if self._required_moves > self._move:
             self._check_and_update_direction()
             if self._direction == 0:
@@ -137,6 +143,7 @@ class Ant:
             print(end="\n")
 
     def run_stimulation(self):
+        """run the ant stimulation"""
         self._move_ant()
 
 
