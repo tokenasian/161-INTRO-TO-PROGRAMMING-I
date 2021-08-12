@@ -13,6 +13,7 @@ class Ant:
         self._ant_y = 5  # pos
         self._get_input_grid_size()
         self._get_ant_starting_pos()
+        self._validate_ant_starting_pos()
         self._get_ant_orientation()
         self._get_ant_steps()
         self._move_ant()
@@ -27,6 +28,14 @@ class Ant:
     def _get_ant_starting_pos(self):
         self._ant_x = int(input("Please enter a number as the starting row number: "))
         self._ant_y = int(input("Please enter a number as the starting column number : "))
+
+    def _validate_ant_starting_pos(self):
+        if self._ant_x > self._size_x - 1:
+            print("Ant starting position was invalid")
+            self._get_ant_starting_pos()
+        if self._ant_y > self._size_y - 1:
+            print("Ant starting position was invalid")
+            self._get_ant_starting_pos()
 
     def _get_ant_orientation(self):
         self._direction = int(input("Please choose the ant’s starting orientation:  "))
